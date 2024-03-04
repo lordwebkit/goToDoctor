@@ -11,7 +11,7 @@ const store = useRegistrationStore()
         class="form__input"
         type="text"
         placeholder="Введите вашу фамилию"
-        v-model="store.lastname"
+        v-model="store.lastName"
       />
     </label>
     <label class="form__label">
@@ -24,7 +24,7 @@ const store = useRegistrationStore()
         class="form__input"
         type="text"
         placeholder="Введите ваше отчество"
-        v-model="store.secondname"
+        v-model="store.secondName"
       />
     </label>
     <label class="form__label">
@@ -51,7 +51,7 @@ const store = useRegistrationStore()
         class="form__input"
         type="password"
         placeholder="Введите ваш пароль еще раз"
-        v-model="store.repassword"
+        v-model="store.rePassword"
       />
     </label>
   </form>

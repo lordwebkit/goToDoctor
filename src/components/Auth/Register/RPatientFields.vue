@@ -70,13 +70,17 @@ const store = useRegistrationStore()
   position: relative;
   padding-left: 35px;
 
-  cursor: pointer;
+  @media (min-width: 600px) {
+    cursor: pointer;
+  }
   font-size: 16px;
 
   &__input {
     position: absolute;
     opacity: 0;
-    cursor: pointer;
+    @media (min-width: 600px) {
+      cursor: pointer;
+    }
 
     &:checked ~ .radio__btn {
       background-color: var(--gd-c-green);

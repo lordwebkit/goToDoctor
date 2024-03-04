@@ -22,7 +22,14 @@ const store = useRegistrationStore()
         <RPatientFields v-if="store.activeTab === 'patient'" />
         <RDoctorFields v-if="store.activeTab === 'doctor'" />
       </div>
-      <button class="register__send">Зарегистрироваться</button>
+      <button
+        class="register__send"
+        :class="{ 'register__send--avail': store.availed }"
+        :disabled="!store.availed"
+        @click="store.checkForm"
+      >
+        Зарегистрироваться
+      </button>
     </div>
   </div>
 </template>
@@ -59,10 +66,14 @@ const store = useRegistrationStore()
     padding: 12px;
     color: gray;
     background-color: var(--color-btn-border);
-    cursor: pointer;
+
+    @media (min-width: 600px) {
+      cursor: pointer;
+    }
 
     &--avail {
-      color: var(--color-text);
+      background-color: var(--color-btn-primary);
+      color: var(--gd-c-white);
     }
   }
 }
