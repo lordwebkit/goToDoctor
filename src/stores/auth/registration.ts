@@ -8,6 +8,7 @@ export const useRegistrationStore = defineStore('registration', () => {
   const phone = ref()
   const email = ref()
   const password = ref()
+  const passwordErr = ref()
   const rePassword = ref()
   const activeTab = ref('patient')
   const birthday = ref()
@@ -24,12 +25,25 @@ export const useRegistrationStore = defineStore('registration', () => {
         ? birthday.value && gender.value
         : specialization.value && clinic.value
 
-    if (fullName && fullPassword && fullActive && fullContact) {
+    const requiredField = fullName && fullPassword && fullActive && fullContact
+    const error = !passwordErr.value
+
+    if (requiredField && error) {
       return true
     }
 
     return false
   })
+
+  const checkPassword = () => {
+    if (password.value !== rePassword.value) {
+      passwordErr.value = 'Пароли не совпадают'
+    }
+  }
+
+  const sendProfile = async () => {
+    checkPassword()
+  }
 
   return {
     lastName,
@@ -38,12 +52,14 @@ export const useRegistrationStore = defineStore('registration', () => {
     phone,
     email,
     password,
+    passwordErr,
     rePassword,
     birthday,
     gender,
     specialization,
     clinic,
     activeTab,
-    availed
+    availed,
+    sendProfile
   }
 })

@@ -31,6 +31,7 @@
 
   --gd-c-gray: #e6e6e6;
 
+  --gd-c-red: #f04438;
 }
 
 /* semantic color variables for this project */
@@ -50,7 +51,8 @@
 
   --color-btn-primary-text: var(--gd-c-white);
 
-  --color-btn-border: var(--gd-c-gray)
+  --color-btn-border: var(--gd-c-gray);
+  --color-error: var(--gd-c-red);
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -83,7 +85,7 @@ body {
     color 0.5s,
     background-color 0.5s;
   line-height: 1.6;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 16px;
   text-rendering: optimizeLegibility;

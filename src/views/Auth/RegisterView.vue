@@ -26,7 +26,7 @@ const store = useRegistrationStore()
         class="register__send"
         :class="{ 'register__send--avail': store.availed }"
         :disabled="!store.availed"
-        @click="store.checkForm"
+        @click="store.sendProfile"
       >
         Зарегистрироваться
       </button>
