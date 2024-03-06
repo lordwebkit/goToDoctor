@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useRegistrationStore } from '@/stores/auth/registration'
+import { vMaska } from "maska"
 
 const store = useRegistrationStore()
 </script>
@@ -25,6 +26,16 @@ const store = useRegistrationStore()
         type="text"
         placeholder="Введите ваше отчество"
         v-model="store.secondName"
+      />
+    </label>
+    <label class="form__label">
+      <p class="form__title">Номер телефона</p>
+      <input
+        class="form__input"
+        type="tel"
+        placeholder="Введите ваш номер телефона"
+        v-model="store.phone"
+        v-maska data-maska="+7 (###) ###-##-##"
       />
     </label>
     <label class="form__label">
