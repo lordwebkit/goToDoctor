@@ -2,14 +2,15 @@
 import { useRouter } from 'vue-router'
 import IconBack from '@/assets/icons/IconBack.vue'
 
-const props = defineProps(['title'])
+const props = defineProps(['title', 'back'])
+const { back = true } = props
 
 const router = useRouter()
 </script>
 <template>
   <header class="header">
     <div class="header__inner">
-      <IconBack @click="() => router.go(-1)" />
+      <IconBack @click="() => router.go(-1)" v-if="back" />
       <p class="header__title">{{ props.title }}</p>
     </div>
   </header>

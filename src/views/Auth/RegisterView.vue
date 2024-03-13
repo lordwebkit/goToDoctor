@@ -6,8 +6,11 @@ import RTabs from '@/components/Auth/Register/RTabs.vue'
 import RPatientFields from '@/components/Auth/Register/RPatientFields.vue'
 import RDoctorFields from '@/components/Auth/Register/RDoctorFields.vue'
 import { useRegistrationStore } from '@/stores/auth/registration'
+import { RegistrationTab } from '@/enums/registrationTab'
+import { watch } from 'vue'
 
 const store = useRegistrationStore()
+
 </script>
 <template>
   <div class="register">
@@ -19,14 +22,21 @@ const store = useRegistrationStore()
       <RForm />
       <div class="register__additional">
         <RTabs />
-        <RPatientFields v-if="store.activeTab === 'patient'" />
-        <RDoctorFields v-if="store.activeTab === 'doctor'" />
+        <RPatientFields v-if="store.activeTab === RegistrationTab.Patient" />
+        <RDoctorFields v-if="store.activeTab === RegistrationTab.Doctor" />
       </div>
+
+      <div
+        class="register__error"
+        v-html="store.registrationError"
+        v-if="store.registrationError"
+      ></div>
+
       <button
         class="register__send"
-        :class="{ 'register__send--avail': store.availed }"
-        :disabled="!store.availed"
-        @click="store.sendProfile"
+        :class="{ 'register__send--avail': store.canAddNewUser }"
+        :disabled="!store.canAddNewUser"
+        @click="store.addNewUser"
       >
         Зарегистрироваться
       </button>
@@ -51,6 +61,12 @@ const store = useRegistrationStore()
     margin-top: 20px;
   }
 
+  &__error {
+    color: var(--color-error);
+    font-size: 14px;
+    padding: 8px 14px;
+  }
+
   &__send {
     display: flex;
     justify-content: center;
@@ -67,13 +83,12 @@ const store = useRegistrationStore()
     color: gray;
     background-color: var(--color-btn-border);
 
-    @media (min-width: 600px) {
-      cursor: pointer;
-    }
-
     &--avail {
       background-color: var(--color-btn-primary);
       color: var(--gd-c-white);
+      @media (min-width: 600px) {
+        cursor: pointer;
+      }
     }
   }
 }

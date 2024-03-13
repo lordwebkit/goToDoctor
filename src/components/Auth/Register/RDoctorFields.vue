@@ -1,14 +1,22 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import GSelect from '@/components/Global/GSelect.vue'
+import { useRegistrationStore } from '@/stores/auth/registration'
+
+const store = useRegistrationStore()
+
+const select = (id: string) => {
+  store.clinic = id
+}
+
+store.reqGetAllClinics()
+</script>
 <template>
   <form class="form">
     <label class="form__label">
       <p class="form__title">Специализация</p>
       <input class="form__input" type="text" placeholder="Введите вашу специализация" />
     </label>
-    <label class="form__label">
-      <p class="form__title">Клиника</p>
-      <input class="form__input" type="text" placeholder="Введите вашу клиника" />
-    </label>
+    <GSelect :list="store.clinicsList" :selected="store.clinic" @select="select" />
   </form>
 </template>
 <style lang="scss" scoped>

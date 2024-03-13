@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { RegistrationTab } from '@/enums/registrationTab'
 import { useRegistrationStore } from '@/stores/auth/registration'
 
 const store = useRegistrationStore()
@@ -7,15 +8,15 @@ const store = useRegistrationStore()
   <div class="register__tabs tabs">
     <button
       class="tabs__btn tabs__patient"
-      :class="{ 'tabs__btn--active': store.activeTab === 'patient' }"
-      @click="() => (store.activeTab = 'patient')"
+      :class="{ 'tabs__btn--active': store.activeTab === RegistrationTab.Patient }"
+      @click="() => (store.activeTab = RegistrationTab.Patient)"
     >
       Пациент
     </button>
     <button
       class="tabs__btn tabs__doctor"
-      :class="{ 'tabs__btn--active': store.activeTab === 'doctor' }"
-      @click="() => (store.activeTab = 'doctor')"
+      :class="{ 'tabs__btn--active': store.activeTab === RegistrationTab.Doctor }"
+      @click="() => (store.activeTab = RegistrationTab.Doctor)"
     >
       Врач
     </button>
