@@ -8,7 +8,7 @@ interface Item {
   type_code?: string
 }
 
-const { list, selected } = defineProps<{ list: Item[] | undefined; selected: string }>()
+const { list, selected } = defineProps<{ list: Item[] | null; selected: string }>()
 const emit = defineEmits(['select'])
 
 const handleSelect = (e: Event) => {

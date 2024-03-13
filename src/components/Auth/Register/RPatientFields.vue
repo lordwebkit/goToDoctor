@@ -5,7 +5,7 @@ import GSelect from '@/components/Global/GSelect.vue'
 const store = useRegistrationStore()
 
 const select = (id: string) => {
-  store.city = id
+  store.registration.city = id
 }
 
 store.reqGetAllCities()
@@ -18,12 +18,16 @@ store.reqGetAllCities()
         class="form__input"
         type="date"
         placeholder="Введите вашу дату рождения"
-        v-model="store.birthday"
+        v-model="store.registration.birthday"
       />
     </label>
     <label class="form__label">
       <p class="form__title">Город</p>
-      <GSelect :list="store.citiesList" :selected="store.city" @select="select" />
+      <GSelect
+        :list="store.registration.citiesList"
+        :selected="store.registration.city"
+        @select="select"
+      />
     </label>
   </form>
 </template>

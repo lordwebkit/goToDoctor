@@ -17,12 +17,17 @@ const store = useRegistrationStore()
         class="form__input"
         type="text"
         placeholder="Введите вашу фамилию"
-        v-model="store.lastName"
+        v-model="store.registration.lastName"
       />
     </label>
     <label class="form__label">
       <p class="form__title">Имя</p>
-      <input class="form__input" type="text" placeholder="Введите ваше имя" v-model="store.name" />
+      <input
+        class="form__input"
+        type="text"
+        placeholder="Введите ваше имя"
+        v-model="store.registration.name"
+      />
     </label>
     <label class="form__label">
       <p class="form__title">Отчество</p>
@@ -30,7 +35,7 @@ const store = useRegistrationStore()
         class="form__input"
         type="text"
         placeholder="Введите ваше отчество"
-        v-model="store.secondName"
+        v-model="store.registration.secondName"
       />
     </label>
     <label class="form__label">
@@ -39,7 +44,7 @@ const store = useRegistrationStore()
         class="form__input"
         type="tel"
         placeholder="Введите ваш номер телефона"
-        v-model="store.phone"
+        v-model="store.registration.phone"
         v-maska
         data-maska="+7 (###) ###-##-##"
       />
@@ -50,7 +55,7 @@ const store = useRegistrationStore()
         class="form__input"
         type="email"
         placeholder="Введите ваш email"
-        v-model="store.email"
+        v-model="store.registration.email"
       />
     </label>
     <label class="form__label">
@@ -60,8 +65,8 @@ const store = useRegistrationStore()
         class="form__input"
         :type="passwordType"
         placeholder="Введите ваш пароль"
-        v-model="store.password"
-        @input="() => (store.passwordErr = '')"
+        v-model="store.registration.password"
+        @input="() => (store.registration.passwordErr = '')"
       />
     </label>
     <label class="form__label">
@@ -70,12 +75,12 @@ const store = useRegistrationStore()
         class="form__input"
         :type="passwordType"
         placeholder="Введите ваш пароль еще раз"
-        v-model="store.rePassword"
-        @input="() => (store.passwordErr = '')"
+        v-model="store.registration.rePassword"
+        @input="() => (store.registration.passwordErr = '')"
       />
     </label>
-    <span class="form__error" v-show="store.passwordErr">
-      {{ store.passwordErr }}
+    <span class="form__error" v-show="store.registration.passwordErr">
+      {{ store.registration.passwordErr }}
     </span>
   </form>
 </template>

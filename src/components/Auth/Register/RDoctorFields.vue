@@ -5,7 +5,7 @@ import { useRegistrationStore } from '@/stores/auth/registration'
 const store = useRegistrationStore()
 
 const select = (id: string) => {
-  store.clinic = id
+  store.registration.clinic = id
 }
 
 store.reqGetAllClinics()
@@ -16,7 +16,11 @@ store.reqGetAllClinics()
       <p class="form__title">Специализация</p>
       <input class="form__input" type="text" placeholder="Введите вашу специализация" />
     </label>
-    <GSelect :list="store.clinicsList" :selected="store.clinic" @select="select" />
+    <GSelect
+      :list="store.registration.clinicsList"
+      :selected="store.registration.clinic"
+      @select="select"
+    />
   </form>
 </template>
 <style lang="scss" scoped>

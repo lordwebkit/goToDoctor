@@ -1,4 +1,4 @@
-import { computed, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { defineStore } from 'pinia'
 import { RegistrationTab } from '@/enums/registrationTab'
 import axios from 'axios'
@@ -17,42 +17,59 @@ interface Clinic {
   name: string
 }
 
+interface Registration {
+  lastName: string
+  name: string
+  secondName: string
+  phone: string
+  email: string
+  password: string
+  passwordErr: string
+  rePassword: string
+  activeTab: RegistrationTab
+  birthday: string
+  citiesList: City[] | null
+  city: string
+  specialization: string
+  clinicsList: Clinic[] | null
+  clinic: string
+}
+
 export const useRegistrationStore = defineStore('registration', () => {
-  const lastName = ref('')
-  const name = ref('')
-  const secondName = ref('')
-  const phone = ref('')
-  const email = ref('')
-  const password = ref('')
-  const passwordErr = ref('')
-  const rePassword = ref('')
-
-  const activeTab = ref(RegistrationTab.Patient)
-
-  const birthday = ref('')
-  const citiesList = ref<City[] | undefined>()
-  const city = ref('')
-
-  const specialization = ref()
-  const clinicsList = ref<Clinic[] | undefined>()
-  const clinic = ref('')
+  const registration = reactive<Registration>({
+    lastName: '',
+    name: '',
+    secondName: '',
+    phone: '',
+    email: '',
+    password: '',
+    passwordErr: '',
+    rePassword: '',
+    activeTab: RegistrationTab.Patient,
+    birthday: '',
+    citiesList: null,
+    city: '',
+    specialization: '',
+    clinicsList: null,
+    clinic: ''
+  })
 
   const registrationError = ref('')
 
   const canAddNewUser = computed<boolean>(() => {
-    const fullName = Boolean(lastName.value && name.value && secondName.value)
-    const fullPassword = Boolean(password.value && rePassword.value)
-    const fullContact = Boolean(email.value && phone.value)
+    const fullName = Boolean(registration.lastName && registration.name && registration.secondName)
+    const fullPassword = Boolean(registration.password && registration.rePassword)
+    const fullContact = Boolean(registration.email && registration.phone)
 
     let fullActive: boolean
-    if (activeTab.value === RegistrationTab.Patient) {
-      fullActive = Boolean(birthday.value && city.value)
+    if (registration.activeTab === RegistrationTab.Patient) {
+      fullActive = Boolean(registration.birthday && registration.city)
     } else {
-      fullActive = Boolean(specialization.value && clinic.value)
+      fullActive = Boolean(registration.specialization && registration.clinic)
     }
 
     const requiredField = fullName && fullPassword && fullContact && fullActive
-    const error = !passwordErr.value && !registrationError.value
+    const error = !registration.passwordErr && !registrationError.value
 
     if (requiredField && error) {
       return true
@@ -64,8 +81,8 @@ export const useRegistrationStore = defineStore('registration', () => {
   const reqGetAllCities = async (): Promise<void> => {
     try {
       const { data } = await axios.get(getAllCitiesUrl)
-      citiesList.value = data
-      city.value = data[0].id
+      registration.citiesList = data
+      registration.city = data[0].id
     } catch (e) {
       console.error(e)
     }
@@ -74,8 +91,8 @@ export const useRegistrationStore = defineStore('registration', () => {
   const reqGetAllClinics = async (): Promise<void> => {
     try {
       const { data } = await axios.get(getAllClinicsUrl)
-      clinicsList.value = data
-      clinic.value = data[0].id
+      registration.clinicsList = data
+      registration.clinic = data[0].id
     } catch (e) {
       console.error(e)
     }
@@ -84,11 +101,11 @@ export const useRegistrationStore = defineStore('registration', () => {
   const reqAddNewUser = async (): Promise<void> => {
     const formData = new FormData()
 
-    formData.append('email', email.value)
-    formData.append('name', name.value)
-    formData.append('last_name', lastName.value)
-    formData.append('phone', phone.value)
-    formData.append('password', password.value)
+    formData.append('email', registration.email)
+    formData.append('name', registration.name)
+    formData.append('last_name', registration.lastName)
+    formData.append('phone', registration.phone)
+    formData.append('password', registration.password)
 
     try {
       const { data } = await axios.post(addNewUserUrl, formData)
@@ -101,8 +118,8 @@ export const useRegistrationStore = defineStore('registration', () => {
   }
 
   const checkForm = (): boolean => {
-    if (password.value !== rePassword.value) {
-      passwordErr.value = 'Пароли не совпадают'
+    if (registration.password !== registration.rePassword) {
+      registration.passwordErr = 'Пароли не совпадают'
       return false
     }
 
@@ -117,22 +134,8 @@ export const useRegistrationStore = defineStore('registration', () => {
   }
 
   return {
-    lastName,
-    name,
-    secondName,
-    phone,
-    email,
-    password,
-    passwordErr,
-    rePassword,
-    birthday,
-    specialization,
-    activeTab,
+    registration,
     canAddNewUser,
-    citiesList,
-    city,
-    clinicsList,
-    clinic,
     registrationError,
     reqGetAllCities,
     reqGetAllClinics,

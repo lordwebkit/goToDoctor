@@ -10,7 +10,9 @@ import { RegistrationTab } from '@/enums/registrationTab'
 import { watch } from 'vue'
 
 const store = useRegistrationStore()
-
+watch(store.registration, () => {
+  store.registrationError = ''
+})
 </script>
 <template>
   <div class="register">
@@ -22,8 +24,8 @@ const store = useRegistrationStore()
       <RForm />
       <div class="register__additional">
         <RTabs />
-        <RPatientFields v-if="store.activeTab === RegistrationTab.Patient" />
-        <RDoctorFields v-if="store.activeTab === RegistrationTab.Doctor" />
+        <RPatientFields v-if="store.registration.activeTab === RegistrationTab.Patient" />
+        <RDoctorFields v-if="store.registration.activeTab === RegistrationTab.Doctor" />
       </div>
 
       <div

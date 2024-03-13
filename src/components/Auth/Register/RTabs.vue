@@ -8,15 +8,15 @@ const store = useRegistrationStore()
   <div class="register__tabs tabs">
     <button
       class="tabs__btn tabs__patient"
-      :class="{ 'tabs__btn--active': store.activeTab === RegistrationTab.Patient }"
-      @click="() => (store.activeTab = RegistrationTab.Patient)"
+      :class="{ 'tabs__btn--active': store.registration.activeTab === RegistrationTab.Patient }"
+      @click="() => (store.registration.activeTab = RegistrationTab.Patient)"
     >
       Пациент
     </button>
     <button
       class="tabs__btn tabs__doctor"
-      :class="{ 'tabs__btn--active': store.activeTab === RegistrationTab.Doctor }"
-      @click="() => (store.activeTab = RegistrationTab.Doctor)"
+      :class="{ 'tabs__btn--active': store.registration.activeTab === RegistrationTab.Doctor }"
+      @click="() => (store.registration.activeTab = RegistrationTab.Doctor)"
     >
       Врач
     </button>
