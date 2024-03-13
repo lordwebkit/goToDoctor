@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { vMaska } from 'maska'
 import { computed, ref } from 'vue'
-import { useRegistrationStore } from '@/stores/auth/registration'
+import { useLoginStore } from '@/stores/auth/login'
 import IconEye from '@/assets/icons/IconEye.vue'
 
 const passwordHide = ref(true)
 const passwordType = computed(() => (passwordHide.value ? 'password' : 'text'))
 
-const store = useRegistrationStore()
+const store = useLoginStore()
 </script>
 <template>
   <form class="form">
@@ -17,7 +17,7 @@ const store = useRegistrationStore()
         class="form__input"
         type="email"
         placeholder="Введите ваш email"
-        v-model="store.email"
+        v-model="store.login.email"
       />
     </label>
     <label class="form__label">
@@ -27,7 +27,7 @@ const store = useRegistrationStore()
         class="form__input"
         :type="passwordType"
         placeholder="Введите ваш пароль"
-        v-model="store.password"
+        v-model="store.login.password"
       />
     </label>
   </form>

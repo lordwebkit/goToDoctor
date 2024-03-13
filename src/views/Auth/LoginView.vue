@@ -3,21 +3,28 @@ import GHeader from '@/components/Global/GHeader.vue'
 import IconLogo from '@/assets/icons/IconLogo.vue'
 import LForm from '@/components/Auth/Login/LForm.vue'
 import { useLoginStore } from '@/stores/auth/login'
+import { watch } from 'vue'
 
 const store = useLoginStore()
+
+watch(store.login, () => {
+  store.loginError = ''
+})
 </script>
 <template>
-  <div class="register">
-    <div class="register__inner container">
+  <div class="login">
+    <div class="login__inner container">
       <GHeader :title="'Авторизация'" />
-      <div class="register__logo">
-        <IconLogo class="register__icon" />
+      <div class="login__logo">
+        <IconLogo class="login__icon" />
       </div>
       <LForm />
+      <div class="login__error" v-html="store.loginError" v-if="store.loginError"></div>
       <button
-        class="register__send"
-        :class="{ 'register__send--avail': store.availed }"
+        class="login__send"
+        :class="{ 'login__send--avail': store.availed }"
         :disabled="!store.availed"
+        @click="store.reqGetAuthToken"
       >
         Войти
       </button>
@@ -25,7 +32,7 @@ const store = useLoginStore()
   </div>
 </template>
 <style lang="scss" scoped>
-.register {
+.login {
   padding-bottom: 20px;
 
   &__logo {
@@ -40,6 +47,12 @@ const store = useLoginStore()
 
   &__additional {
     margin-top: 20px;
+  }
+
+  &__error {
+    color: var(--color-error);
+    font-size: 14px;
+    padding: 8px 14px;
   }
 
   &__send {
