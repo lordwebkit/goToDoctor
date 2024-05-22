@@ -22,6 +22,11 @@ const routes = [
     name: 'signup',
     component: () => import('@/views/auth/AuthSignUpView.vue')
   },
+  {
+    path: '/palette',
+    name: 'palette',
+    component: () => import('@/views/SystemPalette.vue')
+  },
 ]
 
 const router = createRouter({
