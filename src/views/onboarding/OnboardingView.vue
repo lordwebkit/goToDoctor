@@ -1,5 +1,5 @@
 <template>
-  <div class="header-padding">
+  <div class="app-wrapper header-padding">
     <!-- <button
       class="w-36 h-8 bg-cyan-600 rounded-md text-white flex items-center justify-between p-1.5 cursor-pointer ml-5 mb-6"
     >
