@@ -1,3 +1,9 @@
 .header-padding {
   padding-top: 120px;
 }
+
+.app-wrapper {
+  background: url('./src/assets/image/main_header_bg.png') no-repeat;
+  min-height: 100vh;
+  min-width: 100vw;
+}
