@@ -16,7 +16,7 @@
     </div>
     <h1 class="mt-8 font-bold text-lg text-center text-cyan-900">Регистрация</h1>
     <div class="flex justify-center">
-      <form class="flex flex-col justify-center max-w-72 gap-4" @submit.prevent>
+      <form class="flex flex-col justify-center px-8 gap-4" @submit.prevent>
         <div class="mt-8">
           <div class="font-bold text-sm text-black flex gap-10">
             <button

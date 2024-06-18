@@ -9,9 +9,14 @@ export default {
       colors: {
         cyan: {
           900: '#006879',
+          800: '#00939A',
           700: '#00B9C2',
           600: '#16D0CA',
+          150: '#E5F2FC',
           100: '#E5F2FC'
+        },
+        gray: {
+          400: '#979797'
         }
       },
       borderRadius: {
