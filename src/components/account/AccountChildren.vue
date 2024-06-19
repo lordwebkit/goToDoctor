@@ -18,17 +18,29 @@
       <li v-for="child in children" :key="child.id" @click="$emit('change', 'child')">
         <div class="bg-cyan-150 flex flex-col gap-3 py-9 px-4 rounded-xl">
           <div class="flex gap-5">
-            <img class="shrink-0" src="../../assets/icon/user.png" width="48" height="48" alt="Иконка ребенка" />
+            <img
+              class="shrink-0"
+              src="../../assets/icon/user.png"
+              width="48"
+              height="48"
+              alt="Иконка ребенка"
+            />
             <div class="flex flex-col justify-between">
               <p class="font-semibold text-lg text-cyan-700">{{ child.name }}</p>
               <p class="text-sm">{{ child.birthDay }}</p>
             </div>
           </div>
           <div class="flex justify-between">
-            <button class="bg-cyan-700 text-white text-sm py-2 px-4 rounded-lg font-medium" @click="(e) => e.stopPropagation()">
+            <button
+              class="bg-cyan-700 text-white text-sm py-2 px-4 rounded-lg font-medium"
+              @click="(e) => e.stopPropagation()"
+            >
               удалить
             </button>
-            <button class="bg-cyan-700 text-white text-sm py-2 px-4 rounded-lg font-medium" @click="(e) => e.stopPropagation()">
+            <button
+              class="bg-cyan-700 text-white text-sm py-2 px-4 rounded-lg font-medium"
+              @click="(e) => e.stopPropagation()"
+            >
               редактировать
             </button>
           </div>
